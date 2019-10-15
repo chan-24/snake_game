@@ -1,6 +1,11 @@
+
+
+''' #1 importing library and necessary stuff '''
 import curses
 from curses import KEY_RIGHT, KEY_LEFT, KEY_DOWN, KEY_UP
 from random import randint
+
+''' #2 defining important variables '''
 
 WIDTH = 45
 HEIGHT = 20
@@ -10,6 +15,8 @@ SNAKE_LENGTH = 5
 SNAKE_X = SNAKE_LENGTH + 1
 SNAKE_Y = 3
 TIMEOUT = 100
+
+''' #3 make snake object '''
 
 class Snake(object):
     REV_DIR_MAP = {
@@ -40,9 +47,11 @@ class Snake(object):
     def score(self):
         return 'Score : {}'.format(self.hit_score)
 
+    #this adds the snake body
     def add_body(self, body_list):
         self.body_list.extend(body_list)
 
+    # functionality for snake to eat food
     def eat_food(self, food):
         food.reset()
         body = Body(self.last_head_coor[0], self.last_head_coor[1])
@@ -101,6 +110,8 @@ class Snake(object):
         if self.head.x > MAX_X:
             self.head.x = 1
 
+
+''' #4 make a body object '''
 class Body(object):
     def __init__(self, x, y, char='='):
         self.x = x
@@ -111,6 +122,7 @@ class Body(object):
     def coor(self):
         return self.x, self.y
 
+''' #5 make a food object '''
 class Food(object):
     def __init__(self, window, char='&'):
         self.x = randint(1, MAX_X)
@@ -125,6 +137,8 @@ class Food(object):
         self.x = randint(1, MAX_X)
         self.y = randint(1, MAX_Y)
 
+
+''' #4 make a body object '''
 
 if __name__ == '__main__':
     curses.initscr()
